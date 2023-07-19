@@ -1,0 +1,109 @@
+    /* C Program to sort an array in ascending order using Insertion Sort */
+
+     
+
+    #include <stdio.h>
+
+    int main(void)
+
+    {
+
+        int n, i, j, temp;
+
+        int arr[64];
+
+        printf("Enter number of elements\n");
+
+        scanf("%d", &n);
+
+        printf("Enter %d integers\n", n);
+
+        for (i = 0; i < n; i++) 
+
+        {
+
+            scanf("%d", &arr[i]);
+
+        }
+
+        for (i = 1; i < n; i++) 
+
+        {
+
+            j = i;
+
+            while (j > 0 && arr[j - 1] > arr[j]) 
+
+            {
+
+                temp = arr[j];
+
+                arr[j] = arr[j - 1];
+
+                arr[j - 1] = temp;
+
+                j--;
+
+            }
+
+        }
+
+        printf("Sorted list in ascending order:\n");
+
+        for (i = 0; i < n; i++) 
+
+        {
+
+            printf("%d\n", arr[i]);
+
+        }
+
+        return 0;
+
+    }
+
+1. Average case (Unsorted array): When the input array has random distribution of numbers.
+
+For example:
+
+If the input array is {3, 7, 2, 9, 5}
+the expected output array will have data as {2, 3, 5, 7, 9}
+
+2. Best case (Sorted Array): When the input array is already sorted, in that case we have to make minimum number of swaps.
+For example:
+
+If the input array has data as {-3, 31, 66}        
+then the expected output array will have data as {-3, 31, 66}
+
+3. Worst Case (Reverse sorted array): When the array is sorted in a reverse manner, in that case we have to make maximum number of swaps.
+
+For example:
+
+If the input array has elements as {9, 8, 6, 3, 1}
+then the output array will have data as {1, 3, 6, 8, 9}
+
+Insertion Sort Algorithm:
+
+1. We will store the random set of numbers in an array.
+2. We will traverse this array and insert each element of this array, to its correct position where it should actually be, by shifting the other elements on the left if required.
+3. The first element in the array is considered as sorted, even if it is an unsorted array. The array is sub-divided into two parts, the first part holds the first element of the array which is considered to be sorted and second part contains all the remaining elements of array.
+4. With each iteration one element from the second part is picked and inserted into the first part of array at its correct position by shifting the existing elements if required.
+5. This goes until the last element in second part of array is placed in correct position in the output array.
+6. Now, we have the array in sorted order.
+
+Insertion Sort Example:
+
+If we have the array as {40,10,50,70,30}
+and we apply insertion sort to sort the array,
+then the resultant array after each iteration will be as follows:
+
+               Original array: {40, 10, 50, 70, 30}
+
+Array after first iteration is     10 ->  40    ->  50   ->   70   ->   30
+Array after second iteration is    10 ->  40    ->  50   ->   70   ->   30
+Array after third iteration is     10 ->  40    ->  50   ->   70   ->   30
+Array after fourth iteration is    10 ->  30    ->  40   ->   50   ->   70
+            
+               Sorted array is  10  30  40  50  70
+
+
