@@ -16,8 +16,6 @@ the expected output array will have data as {1, 2, 3, 4, 5, 6}
 2. Best case (Sorted Array): When the input array is already sorted, in that case we have to make minimum number of swaps.
 
 For example:
-Sanfoundry Certification Contest of the Month is Live. 100+ Subjects. Participate Now!
-advertisement
 
 If the input array has data as {-3, 31, 66}        
 then the expected output array will have data as {-3, 31, 66}
