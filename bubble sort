@@ -1,1 +1,171 @@
+What is Bubble Sort?
 
+Bubble Sort in C is a simple sorting algorithm that works by repeatedly stepping through the list to be sorted, comparing each pair of adjacent items, and swapping them if they are in the wrong order. Bubble sort technique is used to sort an array of values in increasing or decreasing order.
+Problem Description
+
+Write a C program to perform the bubble sort.
+Expected Input and Output
+
+1. Average case (Unsorted array): When the input array has random distribution of numbers.
+
+For example:
+
+If the input array is {4, 6, 1, 2, 5, 3}      
+the expected output array will have data as {1, 2, 3, 4, 5, 6}
+
+2. Best case (Sorted Array): When the input array is already sorted, in that case we have to make minimum number of swaps.
+
+For example:
+Sanfoundry Certification Contest of the Month is Live. 100+ Subjects. Participate Now!
+advertisement
+
+If the input array has data as {-3, 31, 66}        
+then the expected output array will have data as {-3, 31, 66}
+
+3. Worst Case (Reverse sorted array): When the array is sorted in reverse manner, in that case we have to make maximum number of swaps.
+
+For example:
+
+If the input array has elements as {9, 8, 6, 3, 1}
+then the output array will have data as {1, 3, 6, 8, 9}
+
+Bubble Sort Algorithm
+
+1. In Bubble sort algorithm we compare the first two elements of an array and swap them if required.
+2. If we want to sort the elements of array in ascending order and if the first element is greater than second then, we need to swap the elements.
+3. If the first element is smaller than second, we don’t need to swap the elements. This process go on until last and second last element is compared and swapped.
+Check this: BCA MCQs | Computer Science Books
+
+Bubble Sort Example:
+
+If we have the array as {40,10,50,70,30}
+and we apply bubble sort to sort the array,
+then the resultant array after each iteration will be as follows:
+
+               Original array: {40, 10, 50, 70, 30}
+
+Array after first iteration          10  ->   40   ->   50   ->   30   ->   70
+Array after second iteration         10  ->   40   ->   30   ->   50   ->   70
+Array after third iteration          10  ->   30   ->   40   ->   50   ->   70
+Array after fourth iteration         10  ->   30   ->   40   ->   50   ->   70
+            
+               Sorted array is  10  30  40  50  70
+
+Problem Solution
+
+There are many approaches to implement the bubble sort algorithm. Let’s take a detailed look at all the approaches to perform bubble sort in C.
+
+    Bubble Sort in C using Iterative Approach
+    Recursive Bubble Sort
+    Sort N Numbers in Ascending Order using Bubble Sort
+
+Method 1: Bubble Sort Program in C (Iterative Approach)
+
+In the iterative approach to sort the array, we have to follow the given steps:
+
+    Take an element from the beginning of the array.
+    Compare it with its next element from the start to the end of the unsorted array.
+    If the first element is greater than the second element then swap them.
+    Repeat the above steps until the array does not sort.
+
+Program/Source Code
+
+Here is the source code of the C program to sort integers using Bubble Sort technique. The C program is successfully compiled and run on a Linux system. The program output is also shown below.
+
+    /*
+
+     * C Program to sort an array using Bubble Sort technique
+
+     */
+
+     
+
+    #include <stdio.h>
+
+    void bubblesort(int arr[], int size)
+
+    {
+
+        int i, j;
+
+        for (i = 0;  i < size; i++)
+
+        {
+
+            for (j = 0; j < size - i; j++)
+
+            {
+
+                if (arr[j] > arr[j+1])
+
+                    swap(&arr[j], &arr[j+1]);
+
+     
+
+            }
+
+        }
+
+    }
+
+    void swap(int *a, int *b)
+
+    {
+
+        int temp;
+
+        temp = *a;
+
+        *a = *b;
+
+        *b = temp;
+
+    }
+
+    int main()
+
+    {
+
+        int array[100], i, size;
+
+        printf("How many numbers you want to sort:  ");
+
+        scanf("%d", &size);
+
+        printf("\nEnter %d numbers : ", size);
+
+        for (i = 0; i < size; i++)
+
+            scanf("%d", &array[i]);
+
+        bubblesort(array, size);
+
+        printf("\nSorted array is ");
+
+     
+
+        for (i = 0; i < size; i++)
+
+            printf(" %d ", array[i]);
+
+        return 0;
+
+    }
+
+Time Complexity: O(n2)
+In the worst case, it should have to swap the n elements if the array is reverse sorted. The size of the list is n.
+
+Space Complexity: O(1)
+There is no need to use an extra space that depends on the size of the array. Hence the space completixty of bubble sort program is constant.
+Runtime Test Cases
+
+In this case, we are entering the numbers “345, 3, 20 35, 333” as input to sort them using bubble sort in ascending order.
+
+$ gcc bubblesort.c -o bubblesort
+$ ./bubblesort
+ 
+How many numbers you want to sort: 5
+ 
+Enter 5 numbers : 345 3 20 35 333
+ 
+Sorted array is : 3 20 35 333 345
