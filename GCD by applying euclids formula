@@ -1,0 +1,90 @@
+GCD stands for Greatest Common Divisor. GCD of two numbers in C is the largest positive integer that completely divides both the given numbers.
+
+Example: GCD(10,15) = 15, GCD(12,15) = 3.
+Problem Description
+
+Write a C Program to Find the GCD of two numbers.
+Problem Solution
+
+1. Take two numbers as input.
+2. Find the greater of the two numbers.
+3. Keep on dividing the greater number by the smaller number until remainder becomes 0.
+4. When the remainder becomes 0 print the smaller number i.e., the denominator as the output.
+5. Exit.
+
+There are several ways to find the GCD of two numbers in C language. Let’s look at the five different approaches to write a C program to calculate the GCD of two numbers.
+
+    GCD of Two Numbers in C using While Loop
+    GCD of Two Numbers in C using For Loop
+    GCD of Two Numbers in C using Recursion
+    GCD of Two Numbers in C using Euclidean Algorithm
+    GCD of Two Numbers in C using Recursive Euclidean Algorithm
+
+Method 1: GCD of Two Numbers in C using While Loop
+
+In this approach, we find the GCD of two numbers using a while loop.
+
+Program/Source Code
+
+Here is the source code of the C program to find the GCD of two numbers using a while-loop. The C program is successfully compiled and run on a Linux system. The program output is also shown below.
+
+/*
+ * C program to find the GCD of two integers using While-loop
+ */
+#include<stdio.h>
+ 
+void main()
+{
+    int num1, num2, gcd, remainder, numerator, denominator;
+ 
+    printf("Enter two numbers\n");
+    scanf("%d %d", &num1, &num2);
+    if (num1 > num2)
+    {
+        numerator = num1;
+        denominator = num2;
+    }
+    else
+    {
+        numerator = num2;
+        denominator = num1;
+    }
+    remainder = numerator % denominator;
+    while (remainder != 0)
+    {
+        numerator   = denominator;
+        denominator = remainder;
+        remainder   = numerator % denominator;
+    }
+    gcd = denominator;
+    printf("GCD of %d and %d = %d\n", num1, num2, gcd);
+}
+
+Program Explanation
+
+1. Take the two numbers num1 and num2 as input.
+2. Store the greater number in the variable numerator and the smaller number in the variable denominator.
+3. Run the while loop until the remainder becomes ‘0’. Inside the while loop keep on dividing the numerator by denominator and store the value in the remainder variable.
+4. When the value of the remainder variable becomes ‘0’ come out of the loop and store the value of the denominator in the gcd variable.
+5. Print the gcd.
+
+Example:
+Consider, the two numbers 12 and 15, first find the greater of the two numbers and store the greater in the numerator and smaller in the denominator i.e., numerator=15 and denominator=12. Divide the numerator by the denominator and store the value in the remainder variable i.e., remainder = 15%12 = 3. Now, enter the while loop and check if the remainder value is ‘0’ or not. Now, assign the value of the denominator to the numerator and the value of the remainder to the numerator i.e., numerator=12 and denominator=3 then calculate the remainder of the two variables i.e., remainder = 12%3 = 0. Now, check the while loop condition again, this time remainder = 0, therefore come out of the loop and store the value of the denominator in gcd i.e., gcd = 3. Now, print gcd as 3.
+Become Top Ranker in C Programming Now!
+
+Time Complexity: O(log(min(a,b)))
+The above program for finding GCD of two numbers has a time complexity of O(log(min(a,b))), as the while loop runs for number of times the numerator is divided by the denominator.
+
+Space Complexity: O(1)
+In the above program, space complexity is O(1) as no extra variable has been taken to store the values in the memory. All the variables initialized takes a constant O(1) space.
+Runtime Test Cases
+
+Testcase 1: The numbers entered by the user to calculate gcd in this case are 12 and 15.
+
+Enter the two numbers: 12 15
+GCD of 12 and 15 = 3
+
+Testcase 2: The numbers entered by the user to calculate gcd are 50 and 30.
+
+Enter the two numbers: 50 30
+GCD of 50 and 30 = 10
