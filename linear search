@@ -1,0 +1,167 @@
+Method 1: Linear Search in C using Array
+
+In this approach, we will find if an element X is present in the array or not and if yes find its position pos using array.
+
+An array is a collection of similar data elements stored at contiguous memory locations. It is the simplest data structure where each data element can be accessed directly by only using its index number.
+Expected Input and Output
+
+1. Average Case: If the searched element is other than the first and the last element of the array.
+For example:
+
+If the input array is {4, 6, 1, 2, 5, 3}
+and if the element searched is 6,
+then the expected output will be Position 2.
+
+Average case time complexity: O(n)
+
+2. Best Case: If the searched element is the first element of the array.
+For example:
+
+If the input array is {66, -3, 31}
+and the key searched for is 66,
+then the expected output will be Position 1.
+
+Best case time complexity: O(1)
+
+3. Worst Case: If the element searched for is the last element of the array.
+For example:
+
+If the input array is {1, 3, 6, 1, 9}
+and the key searched for is 9,
+then the expected output will be Position 5.
+
+Worst case time complexity: O(n)
+Program/Source Code
+
+Here is source code of the C Program to find the position of an element requested by the user using Linear Search Algorithm. The program is successfully compiled and tested using Codeblocks gnu/gcc compiler on Windows 10. The program output is also shown below.
+
+    /*
+
+     * C program to input N numbers and store them in an array.
+
+     * Do a linear search for a given key and report success or failure.
+
+     */
+
+     
+
+    #include <stdio.h>
+
+     
+
+    void main()
+
+    {  int num;
+
+     
+
+        int i,  keynum, found = 0;
+
+     
+
+        printf("Enter the number of elements ");
+
+        scanf("%d", &num);
+
+        int array[num];
+
+        printf("Enter the elements one by one \n");
+
+        for (i = 0; i < num; i++)
+
+        {
+
+            scanf("%d", &array[i]);
+
+        }
+
+     
+
+        printf("Enter the element to be searched ");
+
+        scanf("%d", &keynum);
+
+     
+
+        /*  Linear search begins */
+
+        for (i = 0; i < num ; i++)
+
+        {
+
+            if (keynum == array[i] )
+
+            {
+
+                found = 1;
+
+                break;
+
+            }
+
+        }
+
+        if (found == 1)
+
+            printf("Element is present in the array at position %d",i+1);
+
+        else
+
+            printf("Element is not present in the array\n");
+
+    }
+
+Program Explanation
+
+1. In Linear search, we search an element or value in a given array by traversing the array from the starting, till the desired element or value is found.
+2. The array is searched sequentially and the position is returned if the key element to be searched is available in the array, otherwise -1 is returned.
+3. Here in this C Program we have not made any function specifically for linear search, rather we can look for presence of element in an array in the main function itself.
+4. We traverse the array from the 0th index in increasing order of index, if we find the element we break the loop there itself and print the position of the element in the array, but if the element requested is not there in array, we simply print that “Element is not present in the array”.
+5. If we’d have created a separate function for linear search and the element could not be found in the array, we would have returned -1 in that case denoting absence of the element.
+
+Time Complexity:
+
+Average & Worst Case: O(n)
+As the name suggests it is a linear search and we used a loop to iterate over the array from start to end, hence we can affirm that it is of O(n) complexity.
+
+Best Case: O(1)
+The best-case complexity will be found if you find the element at the first index from the start *(according to the approach we used). It can be denoted as O(1)
+
+Space Complexity: O(n + k)
+space complexity of the linear search algorithm is O(n + k), where n = size of the array and k = auxiliary variables.
+Runtime Test Cases
+
+Test Case 1: In this case, we use the linear search algorithm to find the position of element, and the elements are entered in random order i.e {4, 6, 1, 2, 5, 3} and the element to be searched is “6”.
+
+Enter the number of elements 6
+Enter the elements one by one
+4
+6
+1
+2
+5
+3
+Enter the element to be searched 6
+Element is present in the array at position 2
+
+Test Case 2: In this case, we use the linear search algorithm to find the position of element, and the elements are entered in random order i.e {66, -3, 31} and the element to be searched is “66”.
+
+Enter the number of elements 3
+Enter the elements one by one
+66
+-3
+31
+Enter the element to be searched 66
+Element is present in the array at position 1
+
+Test Case 3: In this case, we use the linear search algorithm to find the position of element, and the elements are entered in random order i.e {1, 3, 6, 1, 9} and the element to be searched is “9”.
+
+Enter the number of elements 5
+Enter the elements one by one
+1
+3
+6
+1
+9
+Enter the element to be searched 9
+Element is present in the array at position 5
