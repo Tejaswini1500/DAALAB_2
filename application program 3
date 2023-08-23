@@ -44,3 +44,14 @@ int main() {
 
     return 0;
 }
+
+OUTPUT:
+Enter the number of nodes: 3
+Enter the adjacency matrix:
+1 0 1
+0 0 1
+0 0 0
+Connected components:
+Connected Component: 0 2 
+Connected Component: 1 
+
