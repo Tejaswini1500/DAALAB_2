@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdbool.h>
+#include <limits.h>
+#include <string.h>
+
+#define MAX_NODES 100
+
+// Define a structure to represent edges in the network graph
+struct Edge {
+    int to, capacity, flow;
+};
+
+// Define a structure to represent the network graph
+struct Graph {
+    int numNodes, numEdges;
+    struct Edge edges[MAX_NODES][MAX_NODES];  // Adjacency matrix representation
+};
+
+// Initialize the graph with given number of nodes
+void initGraph(struct Graph *graph, int numNodes) {
+    graph->numNodes = numNodes;
+    graph->numEdges = 0;
+    memset(graph->edges, 0, sizeof(graph->edges));
+}
+
+// Add an edge to the graph
+void addEdge(struct Graph *graph, int from, int to, int capacity) {
+    // Add forward edge
+    graph->edges[from][graph->numEdges].to = to;
+    graph->edges[from][graph->numEdges].capacity = capacity;
+    graph->edges[from][graph->numEdges].flow = 0;
+    graph->numEdges++;
+
+    // Add backward edge for residual graph
+    graph->edges[to][graph->numEdges].to = from;
+    graph->edges[to][graph->numEdges].capacity = 0;  // Capacity is zero for backward edge
+    graph->edges[to][graph->numEdges].flow = 0;
+    graph->numEdges++;
+}
+
+// Find augmenting paths using BFS
+bool bfs(struct Graph *graph, int source, int destination, int parent[]) {
+    // Implement BFS here
+    // Return true if there's a path from source to destination
+}
+
+// Max Flow Min Cut algorithm implementation
+int maxFlowMinCut(struct Graph *graph, int source, int destination) {
+    int parent[MAX_NODES];
+    int maxFlow = 0;
+
+    while (bfs(graph, source, destination, parent)) {
+        // Implement augmenting path and flow update
+    }
+
+    // Calculate the min cut and return max flow
+    // Implement min cut and return maxFlow
+
+    return maxFlow;
+}
+
+int main() {
+    // Initialize the graph and add edges
+
+    int source = 0;
+    int destination = 5;
+
+    struct Graph graph;
+    initGraph(&graph, 6);  // Assuming 6 nodes in the network
+
+    // Add edges using addEdge function
+
+    int maxFlow = maxFlowMinCut(&graph, source, destination);
+    printf("Maximum flow from source to destination: %d\n", maxFlow);
+
+    return 0;
+}
