@@ -1,0 +1,75 @@
+#include <stdio.h>
+#include <string.h>
+
+// Function to reverse a string
+void reverseString(char* str) {
+    int length = strlen(str);
+    for (int i = 0; i < length / 2; i++) {
+        char temp = str[i];
+        str[i] = str[length - i - 1];
+        str[length - i - 1] = temp;
+    }
+}
+
+// Function to multiply two large numbers represented as strings
+void multiplyLargeNumbers(char* num1, char* num2, char* result) {
+    int len1 = strlen(num1);
+    int len2 = strlen(num2);
+
+    // Initialize an array to store the intermediate results
+    int* product = (int*)calloc(len1 + len2, sizeof(int));
+
+    // Reverse the input strings for easier calculation
+    reverseString(num1);
+    reverseString(num2);
+
+    // Perform long multiplication
+    for (int i = 0; i < len1; i++) {
+        for (int j = 0; j < len2; j++) {
+            product[i + j] += (num1[i] - '0') * (num2[j] - '0');
+        }
+    }
+
+    // Handle carries
+    for (int i = 0; i < len1 + len2 - 1; i++) {
+        product[i + 1] += product[i] / 10;
+        product[i] %= 10;
+    }
+
+    // Reverse the product and convert it to a string
+    int index = len1 + len2 - 1;
+    while (index >= 0 && product[index] == 0) {
+        index--;
+    }
+
+    if (index == -1) {
+        strcpy(result, "0");
+    } else {
+        int resultIndex = 0;
+        while (index >= 0) {
+            result[resultIndex++] = product[index--] + '0';
+        }
+        result[resultIndex] = '\0';
+    }
+
+    // Clean up
+    free(product);
+}
+
+int main() {
+    char num1[1000];
+    char num2[1000];
+    char result[2000]; // Maximum possible result length
+
+    printf("Enter the first number: ");
+    scanf("%s", num1);
+
+    printf("Enter the second number: ");
+    scanf("%s", num2);
+
+    multiplyLargeNumbers(num1, num2, result);
+
+    printf("Multiplication Result: %s\n", result);
+
+    return 0;
+}
