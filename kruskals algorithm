@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure to represent an edge
+struct Edge {
+    int src, dest, weight;
+};
+
+// Structure to represent a graph
+struct Graph {
+    int V, E;
+    struct Edge* edge;
+};
+
+// Create a graph with V vertices and E edges
+struct Graph* createGraph(int V, int E) {
+    struct Graph* graph = (struct Graph*)malloc(sizeof(struct Graph));
+    graph->V = V;
+    graph->E = E;
+    graph->edge = (struct Edge*)malloc(E * sizeof(struct Edge));
+    return graph;
+}
+
+// A utility function to find the subset of an element i
+int find(int parent[], int i) {
+    if (parent[i] == -1)
+        return i;
+    return find(parent, parent[i]);
+}
+
+// A utility function to do union of two subsets
+void Union(int parent[], int x, int y) {
+    int xset = find(parent, x);
+    int yset = find(parent, y);
+    parent[xset] = yset;
+}
+
+// Compare function for sorting edges based on their weight
+int compare(const void* a, const void* b) {
+    struct Edge* a_edge = (struct Edge*)a;
+    struct Edge* b_edge = (struct Edge*)b;
+    return a_edge->weight - b_edge->weight;
+}
+
+// Function to find the minimum spanning tree using Kruskal's algorithm
+void kruskalMST(struct Graph* graph) {
+    int V = graph->V;
+    struct Edge result[V];
+    int e = 0;
+    int i = 0;
+    
+    // Step 1: Sort all the edges in non-decreasing order of their weight
+    qsort(graph->edge, graph->E, sizeof(graph->edge[0]), compare);
+    
+    // Create an array to store the parent of each vertex, initially all set to -1
+    int parent[V];
+    for (i = 0; i < V; i++)
+        parent[i] = -1;
+    
+    i = 0; // An index variable, used for result[]
+
+    // Step 2: Include the smallest edge and increment index for the next iteration
+    while (e < V - 1 && i < graph->E) {
+        struct Edge next_edge = graph->edge[i++];
+        
+        int x = find(parent, next_edge.src);
+        int y = find(parent, next_edge.dest);
+        
+        // If including this edge does not cause a cycle, add it to the result
+        if (x != y) {
+            result[e++] = next_edge;
+            Union(parent, x, y);
+        }
+    }
+    
+    // Print the MST
+    printf("Edges in MST:\n");
+    for (i = 0; i < e; i++) {
+        printf("%d - %d : %d\n", result[i].src, result[i].dest, result[i].weight);
+    }
+}
+
+int main() {
+    int V, E;
+
+    printf("Enter the number of vertices: ");
+    scanf("%d", &V);
+
+    printf("Enter the number of edges: ");
+    scanf("%d", &E);
+
+    struct Graph* graph = createGraph(V, E);
+
+    printf("Enter the edges (source, destination, weight):\n");
+    for (int i = 0; i < E; i++) {
+        scanf("%d %d %d", &graph->edge[i].src, &graph->edge[i].dest, &graph->edge[i].weight);
+    }
+
+    kruskalMST(graph);
+
+    return 0;
+}
