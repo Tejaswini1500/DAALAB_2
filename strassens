@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to allocate memory for a matrix
+int** allocateMatrix(int n) {
+    int** matrix = (int**)malloc(n * sizeof(int*));
+    for (int i = 0; i < n; i++) {
+        matrix[i] = (int*)malloc(n * sizeof(int));
+    }
+    return matrix;
+}
+
+// Function to free memory allocated for a matrix
+void freeMatrix(int** matrix, int n) {
+    for (int i = 0; i < n; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+}
+
+// Function to add two matrices
+void addMatrix(int** A, int** B, int** C, int n) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            C[i][j] = A[i][j] + B[i][j];
+        }
+    }
+}
+
+// Function to subtract two matrices
+void subtractMatrix(int** A, int** B, int** C, int n) {
+    for (int i = 0; i < n
