@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+// Function to find the vertex with the minimum key value
+int minKey(int key[], int mstSet[], int V) {
+    int min = INT_MAX, min_index;
+
+    for (int v = 0; v < V; v++) {
+        if (!mstSet[v] && key[v] < min) {
+            min = key[v];
+            min_index = v;
+        }
+    }
+
+    return min_index;
+}
+
+// Function to print the MST
+void printMST(int parent[], int graph[], int V) {
+    printf("Edge \t Weight\n");
+    for (int i = 1; i < V; i++) {
+        printf("%d - %d \t %d\n", parent[i], i, graph[i * V + parent[i]]);
+    }
+}
+
+// Function to implement Prim's algorithm to find the MST
+void primMST(int graph[], int V) {
+    int parent[V];  // Array to store the constructed MST
+    int key[V];     // Key values used to pick the minimum weight edge
+    int mstSet[V];  // To represent the set of vertices included in MST
+
+    // Initialize key values as INFINITE and mstSet[] as false
+    for (int i = 0; i < V; i++) {
+        key[i] = INT_MAX;
+        mstSet[i] = 0;
+    }
+
+    // Start with the first vertex
+    key[0] = 0;
+    parent[0] = -1; // First node is always the root of MST
+
+    // Construct the MST with V-1 edges
+    for (int count = 0; count < V - 1; count++) {
+        int u = minKey(key, mstSet, V);
+
+        mstSet[u] = 1;
+
+        for (int v = 0; v < V; v++) {
+            if (graph[u * V + v] && !mstSet[v] && graph[u * V + v] < key[v]) {
+                parent[v] = u;
+                key[v] = graph[u * V + v];
+            }
+        }
+    }
+
+    // Print the MST
+    printMST(parent, graph, V);
+}
+
+int main() {
+    int V;
+
+    printf("Enter the number of vertices: ");
+    scanf("%d", &V);
+
+    int graph[V][V];
+
+    printf("Enter the adjacency matrix (%d x %d):\n", V, V);
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+
+    // Convert the 2D array to a 1D array for convenience
+    int flattenedGraph[V * V];
+    for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+            flattenedGraph[i * V + j] = graph[i][j];
+        }
+    }
+
+    primMST(flattenedGraph, V);
+
+    return 0;
+}
