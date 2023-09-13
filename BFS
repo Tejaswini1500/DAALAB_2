@@ -90,3 +90,32 @@ int main() {
 
     return 0;
 }
+
+TIME COMPLEXITY:
+
+BFS operates by visiting each vertex in the graph exactly once, exploring all vertices at the current level before moving on to the next level. Its time complexity depends on the number of vertices and edges in the graph and is typically analyzed as follows:
+
+    In the worst case, BFS might visit every vertex and every edge in the graph. This means that the time complexity can be expressed as O(V + E), where V is the number of vertices (nodes) in the graph, and E is the number of edges.
+
+    If the graph is represented using an adjacency matrix, the time complexity would be O(V^2) because checking for adjacent vertices for every vertex takes O(V) time, and there could be up to V vertices.
+
+    If the graph is represented using an adjacency list, the time complexity would be O(V + E) because, in this representation, you can efficiently access the neighbors of each vertex.
+
+ALGORITHM:
+Step 1: SET STATUS = 1 (ready state) for each node in G
+
+Step 2: Enqueue the starting node A and set its STATUS = 2 (waiting state)
+
+Step 3: Repeat Steps 4 and 5 until QUEUE is empty
+
+Step 4: Dequeue a node N. Process it and set its STATUS = 3 (processed state).
+
+Step 5: Enqueue all the neighbours of N that are in the ready state (whose STATUS = 1) and set
+
+their STATUS = 2
+
+(waiting state)
+
+[END OF LOOP]
+
+Step 6: EXIT
